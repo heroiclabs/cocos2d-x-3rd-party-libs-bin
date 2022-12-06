@@ -116,7 +116,7 @@ if(BUILD_LUA_LIBS)
     add_subdirectory(lua/luajit)
     add_subdirectory(lua/tolua)
     add_subdirectory(lua/luasocket)
-    set_property(TARGET external APPEND PROPERTY 
+    set_property(TARGET external APPEND PROPERTY
         CC_LUA_DEPEND ext_luajit ext_tolua ext_luasocket
     )
 endif()
@@ -127,14 +127,14 @@ if(NOT LINUX)
         target_link_libraries(external ext_curl)
     endif(BUILD_EXT_CURL)
     add_subdirectory(png)
-    target_link_libraries(external 
+    target_link_libraries(external
         ext_png
     )
 endif(NOT LINUX)
-    
+
 if(LINUX)
     add_subdirectory(linux-specific/fmod)
-    target_link_libraries(external 
+    target_link_libraries(external
         ext_fmod
     )
 endif()
@@ -143,9 +143,9 @@ if(ANDROID)
     add_subdirectory(android-specific/cpufeatures)
     add_subdirectory(android-specific/pvmp3dec)
     add_subdirectory(android-specific/tremolo)
-    target_link_libraries(external 
-        ext_cpufeatures 
-        ext_pvmp3dec 
+    target_link_libraries(external
+        ext_cpufeatures
+        ext_pvmp3dec
         ext_tremolo
     )
 endif()
@@ -161,7 +161,7 @@ if(WINDOWS)
     add_subdirectory(win32-specific/MP3Decoder)
     add_subdirectory(win32-specific/OggDecoder)
     add_subdirectory(win32-specific/OpenalSoft)
-    target_link_libraries(external 
+    target_link_libraries(external
         ext_gles
         ext_icon
         ext_MP3Decoder
@@ -170,9 +170,9 @@ if(WINDOWS)
     )
 endif()
 
-if(WINDOWS OR MACOSX OR LINUX)
+if(WINDOWS OR MACOSX OR (NOT ANDROID AND LINUX))
     add_subdirectory(glfw3)
-    target_link_libraries(external 
+    target_link_libraries(external
         ext_glfw3
     )
 endif()
@@ -180,7 +180,7 @@ endif()
 if(MACOSX OR ANDROID OR WINDOWS)
     if(BUILD_EXT_ZLIB)
         add_subdirectory(zlib)
-        target_link_libraries(external 
+        target_link_libraries(external
             ext_zlib
         )
     endif(BUILD_EXT_ZLIB)
